@@ -5,15 +5,19 @@ interface CoverEnvelopeProps {
   config: WeddingConfig;
   guestName: string | null;
   onOpen: () => void;
+  onStartOpening?: () => void;
 }
 
-export const CoverEnvelope: React.FC<CoverEnvelopeProps> = ({ guestName: _guestName, onOpen }) => {
+export const CoverEnvelope: React.FC<CoverEnvelopeProps> = ({ guestName: _guestName, onOpen, onStartOpening }) => {
   const [isOpening, setIsOpening] = useState(false);
 
   const handleOpenClick = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (isOpening) return;
     setIsOpening(true);
+    if (onStartOpening) {
+      onStartOpening();
+    }
     setTimeout(() => {
       onOpen();
     }, 1100);
@@ -21,7 +25,7 @@ export const CoverEnvelope: React.FC<CoverEnvelopeProps> = ({ guestName: _guestN
 
   return (
     <div
-      className={`royal-doors-viewport ${isOpening ? 'doors-open' : ''}`}
+      className={`royal-doors-viewport envelope-section ${isOpening ? 'doors-open' : ''}`}
       onClick={() => handleOpenClick()}
     >
       <div className="envelope-mobile-wrapper">

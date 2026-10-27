@@ -20,15 +20,23 @@ export const App: React.FC = () => {
     }
   }, []);
 
+  const handleStartOpening = () => {
+    setAutoPlayMusic(true);
+  };
+
   const handleOpenInvitation = () => {
     setIsOpened(true);
-    setAutoPlayMusic(true);
   };
 
   return (
     <div className={`app-root theme-${config.theme}`}>
       {!isOpened && (
-        <CoverEnvelope config={config} guestName={guestName} onOpen={handleOpenInvitation} />
+        <CoverEnvelope
+          config={config}
+          guestName={guestName}
+          onStartOpening={handleStartOpening}
+          onOpen={handleOpenInvitation}
+        />
       )}
 
       <main className="main-content">
@@ -37,9 +45,11 @@ export const App: React.FC = () => {
         <EventsSection config={config} />
       </main>
 
-      {isOpened && (
-        <MusicPlayer musicUrl={config.bgMusicUrl} autoPlayTriggered={autoPlayMusic} />
-      )}
+      <MusicPlayer
+        musicUrl={config.bgMusicUrl}
+        autoPlayTriggered={autoPlayMusic}
+        isVisible={isOpened}
+      />
     </div>
   );
 };
