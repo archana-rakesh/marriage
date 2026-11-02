@@ -110,7 +110,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ config }) => {
               <div className="event-block-details event-right-align">
                 <div className="event-title-badge">
                   <Sparkles size={14} className="gold-icon" />
-                  <span>GRAND RECEPTION</span>
+                  <span>RECEPTION</span>
                 </div>
                 <h3 className="event-simple-heading font-serif">
                   {receptionEvent.location}
