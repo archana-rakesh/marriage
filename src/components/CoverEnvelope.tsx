@@ -29,21 +29,21 @@ export const CoverEnvelope: React.FC<CoverEnvelopeProps> = ({ guestName: _guestN
       onClick={() => handleOpenClick()}
     >
       <div className="envelope-mobile-wrapper">
-        {/* Bottom Body Envelope Panel */}
-        <div className="envelope-body-panel">
+        {/* Left Side Door Panel */}
+        <div className="door-panel door-panel-left">
           <img
-            src="images/card-bottom-body.jpg"
-            alt="Envelope Body"
-            className="envelope-body-img"
+            src="images/card-door-left.jpg"
+            alt="Left Cover Door"
+            className="door-img door-img-left"
           />
         </div>
 
-        {/* Top Flap Envelope Panel */}
-        <div className="envelope-top-panel">
+        {/* Right Side Door Panel */}
+        <div className="door-panel door-panel-right">
           <img
-            src="images/card-top-flap.png"
-            alt="Envelope Top Flap"
-            className="envelope-top-img"
+            src="images/card-door-right.jpg"
+            alt="Right Cover Door"
+            className="door-img door-img-right"
           />
         </div>
 

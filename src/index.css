@@ -284,53 +284,52 @@ body, html {
   /* box-shadow: 0 0 60px rgba(0, 0, 0, 0.95); */
 }
 
-/* Bottom Body Envelope Panel */
-.envelope-body-panel {
+/* Left & Right Door Panels */
+.door-panel {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  width: 50.5%;
   height: 100%;
+  overflow: hidden;
   z-index: 10;
   transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease 0.2s;
 }
 
-.envelope-body-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-}
-
-/* Top Triangular Flap Panel */
-.envelope-top-panel {
-  position: absolute;
-  top: 0;
+.door-panel-left {
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 20;
-  transform-origin: top center;
-  transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease 0.2s;
+  transform-origin: left center;
+  box-shadow: 2px 0 14px rgba(0, 0, 0, 0.6);
 }
 
-.envelope-top-img {
+.door-panel-right {
+  right: 0;
+  transform-origin: right center;
+  box-shadow: -2px 0 14px rgba(0, 0, 0, 0.6);
+}
+
+.door-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
   display: block;
 }
 
-/* Opening Envelope Animations */
-.doors-open .envelope-top-panel {
-  transform: translateY(-100%) rotateX(45deg);
+.door-img-left {
+  object-position: left center;
+}
+
+.door-img-right {
+  object-position: right center;
+}
+
+/* Door Opening Animations (Doors slide apart to Left & Right) */
+.doors-open .door-panel-left {
+  transform: translateX(-100%);
   opacity: 0;
 }
 
-.doors-open .envelope-body-panel {
-  transform: translateY(100%);
+.doors-open .door-panel-right {
+  transform: translateX(100%);
   opacity: 0;
 }
 
