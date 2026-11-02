@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Heart, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import type { WeddingConfig } from '../types/invitation';
 
 interface InvitationSectionProps {
@@ -35,61 +35,52 @@ export const InvitationSection: React.FC<InvitationSectionProps> = ({ config: _c
 
       <div className="section-container container">
         <div className="event-overlay-content">
-          {/* Line 1: Cordial Invitation Badge */}
-          <div
-            className={`save-date-badge slow-fade-in-up ${isVisible ? 'visible' : ''}`}
-            style={{ animationDelay: '0.1s', transitionDelay: '0.1s' }}
-          >
-            <Heart size={15} className="gold-icon" />
-            <span>CORDIAL INVITATION</span>
-          </div>
-
-          {/* Line 2: Guest Welcome Badge (if present) */}
+          {/* Guest Welcome Badge (if present) */}
           {guestName && (
             <div className="guest-welcome-badge">
               <span
                 className={`guest-badge-label font-sub slow-fade-in-up ${isVisible ? 'visible' : ''}`}
-                style={{ animationDelay: '0.35s', transitionDelay: '0.35s' }}
+                style={{ animationDelay: '0.1s', transitionDelay: '0.1s' }}
               >
                 DEAREST GUEST
               </span>
               <h3
                 className={`guest-name-highlight slow-fade-in-up ${isVisible ? 'visible' : ''}`}
-                style={{ animationDelay: '0.6s', transitionDelay: '0.6s' }}
+                style={{ animationDelay: '0.35s', transitionDelay: '0.35s' }}
               >
                 {guestName}
               </h3>
             </div>
           )}
 
-          {/* Line 3: Event Title */}
+          {/* Event Title */}
           <h2
             className={`overlay-event-title font-serif slow-fade-in-up ${isVisible ? 'visible' : ''}`}
-            style={{ animationDelay: guestName ? '0.85s' : '0.4s', transitionDelay: guestName ? '0.85s' : '0.4s' }}
+            style={{ animationDelay: guestName ? '0.6s' : '0.1s', transitionDelay: guestName ? '0.6s' : '0.1s' }}
           >
             Welcome To Our Celebration
           </h2>
 
-          {/* Line 4: Title Underline */}
+          {/* Title Underline */}
           <div
             className={`title-underline slow-fade-in-up ${isVisible ? 'visible' : ''}`}
-            style={{ animationDelay: guestName ? '1.1s' : '0.65s', transitionDelay: guestName ? '1.1s' : '0.65s' }}
+            style={{ animationDelay: guestName ? '0.85s' : '0.35s', transitionDelay: guestName ? '0.85s' : '0.35s' }}
           ></div>
 
-          {/* Line 5: Blessing Quote */}
+          {/* Blessing Quote */}
           <p
             className={`invitation-blessing-quote font-sub slow-fade-in-up ${isVisible ? 'visible' : ''}`}
-            style={{ animationDelay: guestName ? '1.35s' : '0.9s', transitionDelay: guestName ? '1.35s' : '0.9s' }}
+            style={{ animationDelay: guestName ? '1.1s' : '0.6s', transitionDelay: guestName ? '1.1s' : '0.6s' }}
           >
             "With the blessings of our beloved families, we request the honour of your presence as we unite in holy matrimony."
           </p>
         </div>
 
-        {/* Line 6: Scroll Indicator */}
+        {/* Scroll Indicator */}
         <a
           href="#events"
           className={`scroll-indicator margin-top-md slow-fade-in-up ${isVisible ? 'visible' : ''}`}
-          style={{ animationDelay: guestName ? '1.6s' : '1.15s', transitionDelay: guestName ? '1.6s' : '1.15s' }}
+          style={{ animationDelay: guestName ? '1.35s' : '0.85s', transitionDelay: guestName ? '1.35s' : '0.85s' }}
           aria-label="Scroll to Events"
         >
           <span className="scroll-text">SCROLL FOR EVENTS</span>
