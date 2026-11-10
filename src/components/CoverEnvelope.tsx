@@ -52,7 +52,7 @@ export const CoverEnvelope: React.FC<CoverEnvelopeProps> = ({ guestName: _guestN
           <button
             className="center-seal-btn"
             onClick={handleOpenClick}
-            aria-label="Tap to Open Royal Invitation"
+            aria-label="Click here to open invitation"
           >
             <div className="seal-gold-wrapper">
               <img
@@ -62,15 +62,9 @@ export const CoverEnvelope: React.FC<CoverEnvelopeProps> = ({ guestName: _guestN
               />
             </div>
 
-            {/* <div className="tap-hint-wrap">
-              <div className="gold-chevron"></div>
-              <span className="tap-hint-text font-sub">TAP TO OPEN</span>
-              {guestName && (
-                <div className="guest-welcome-pill">
-                  Invited Guest: <strong>{guestName}</strong>
-                </div>
-              )}
-            </div> */}
+            <div className="tap-hint-wrap">
+              <span className="tap-hint-text font-sub">Click here to open</span>
+            </div>
           </button>
         </div>
       </div>
