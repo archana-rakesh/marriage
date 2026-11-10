@@ -5,9 +5,22 @@ import type { WeddingConfig } from '../types/invitation';
 interface InvitationSectionProps {
   config: WeddingConfig;
   guestName: string | null;
+  photoUrl?: string;
+  sampleBadge?: string;
+  sectionId?: string;
+  nextSectionId?: string;
+  nextLabel?: string;
 }
 
-export const InvitationSection: React.FC<InvitationSectionProps> = ({ config: _config, guestName }) => {
+export const InvitationSection: React.FC<InvitationSectionProps> = ({
+  config: _config,
+  guestName,
+  photoUrl,
+  sampleBadge,
+  sectionId = 'invitation',
+  nextSectionId = '#events',
+  nextLabel = 'SCROLL FOR EVENTS',
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -27,14 +40,24 @@ export const InvitationSection: React.FC<InvitationSectionProps> = ({ config: _c
   }, []);
 
   return (
-    <section className="snap-section invitation-section" id="invitation" ref={sectionRef}>
+    <section className="snap-section invitation-section" id={sectionId} ref={sectionRef}>
       {/* Couple Photo Background */}
-      <div className="section-bg-image" style={{ backgroundImage: `url(${_config.coupleHeroPhoto})` }}>
+      <div className="section-bg-image" style={{ backgroundImage: `url(${photoUrl || _config.coupleHeroPhoto})` }}>
         <div className="section-overlay-gradient"></div>
       </div>
 
       <div className="section-container container">
         <div className="event-overlay-content">
+          {/* Sample Indicator Badge */}
+          {sampleBadge && (
+            <div
+              className={`sample-indicator-badge slow-fade-in-up ${isVisible ? 'visible' : ''}`}
+              style={{ animationDelay: '0.05s', transitionDelay: '0.05s' }}
+            >
+              <span>{sampleBadge}</span>
+            </div>
+          )}
+
           {/* Guest Welcome Badge (if present) */}
           {guestName && (
             <div className="guest-welcome-badge">
@@ -78,12 +101,12 @@ export const InvitationSection: React.FC<InvitationSectionProps> = ({ config: _c
 
         {/* Scroll Indicator */}
         <a
-          href="#events"
+          href={nextSectionId}
           className={`scroll-indicator margin-top-md slow-fade-in-up ${isVisible ? 'visible' : ''}`}
           style={{ animationDelay: guestName ? '1.35s' : '0.85s', transitionDelay: guestName ? '1.35s' : '0.85s' }}
-          aria-label="Scroll to Events"
+          aria-label={nextLabel}
         >
-          <span className="scroll-text">SCROLL FOR EVENTS</span>
+          <span className="scroll-text">{nextLabel}</span>
           <ChevronDown className="bounce-arrow" size={20} />
         </a>
       </div>
