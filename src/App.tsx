@@ -41,42 +41,7 @@ export const App: React.FC = () => {
 
       <main className="main-content">
         <HeroSection config={config} />
-
-        {[
-          {
-            id: 'invitation',
-            photoUrl: 'images/couple-dark.jpg',
-            badge: 'Sample 1 of 3 • Dark',
-            nextSectionId: '#invitation-sample-2',
-            nextLabel: 'VIEW SAMPLE 2',
-          },
-          {
-            id: 'invitation-sample-2',
-            photoUrl: 'images/couple4.jpg',
-            badge: 'Sample 2 of 3 • Bright',
-            nextSectionId: '#invitation-sample-3',
-            nextLabel: 'VIEW SAMPLE 3',
-          },
-          {
-            id: 'invitation-sample-3',
-            photoUrl: 'images/couple-vignette.jpg',
-            badge: 'Sample 3 of 3 • Vignette',
-            nextSectionId: '#events',
-            nextLabel: 'SCROLL FOR EVENTS',
-          },
-        ].map((sample) => (
-          <InvitationSection
-            key={sample.id}
-            config={config}
-            guestName={guestName}
-            photoUrl={sample.photoUrl}
-            sampleBadge={sample.badge}
-            sectionId={sample.id}
-            nextSectionId={sample.nextSectionId}
-            nextLabel={sample.nextLabel}
-          />
-        ))}
-
+        <InvitationSection config={config} guestName={guestName} />
         <EventsSection config={config} />
       </main>
 
