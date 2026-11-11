@@ -119,7 +119,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ config }) => {
                   {receptionEvent.address}
                 </p>
                 <p className="event-simple-meta">
-                  Sunday, Nov 29 • 06:30 PM Onwards
+                  Sunday, Nov 29 • 05:30 PM Onwards
                 </p>
               </div>
             </div>

@@ -36,7 +36,7 @@ export const DEFAULT_WEDDING_CONFIG: WeddingConfig = {
       title: 'Grand Wedding Reception',
       subtitle: 'Evening Celebrations & Dinner',
       date: 'Sunday, November 29, 2026',
-      time: '06:30 PM Onwards',
+      time: '05:30 PM Onwards',
       location: 'The Nest & Meadows',
       address: 'Nagercoil',
       mapUrl: 'https://maps.app.goo.gl/ch3mG7PE8BH4AMnF9',
