@@ -41,48 +41,7 @@ export const App: React.FC = () => {
 
       <main className="main-content">
         <HeroSection config={config} />
-
-        {/* 4 Sample sections for the user to choose their favorite photo */}
-        <InvitationSection
-          config={config}
-          guestName={guestName}
-          photoUrl="images/couple1.jpg"
-          sampleBadge="Sample 1 of 4 • couple1.jpg"
-          sectionId="invitation"
-          nextSectionId="#invitation-sample-2"
-          nextLabel="VIEW SAMPLE 2"
-        />
-
-        <InvitationSection
-          config={config}
-          guestName={guestName}
-          photoUrl="images/couple2.jpg"
-          sampleBadge="Sample 2 of 4 • couple2.jpg"
-          sectionId="invitation-sample-2"
-          nextSectionId="#invitation-sample-3"
-          nextLabel="VIEW SAMPLE 3"
-        />
-
-        <InvitationSection
-          config={config}
-          guestName={guestName}
-          photoUrl="images/couple3.jpg"
-          sampleBadge="Sample 3 of 4 • couple3.jpg"
-          sectionId="invitation-sample-3"
-          nextSectionId="#invitation-sample-4"
-          nextLabel="VIEW SAMPLE 4"
-        />
-
-        <InvitationSection
-          config={config}
-          guestName={guestName}
-          photoUrl="images/couple4.jpg"
-          sampleBadge="Sample 4 of 4 • couple4.jpg"
-          sectionId="invitation-sample-4"
-          nextSectionId="#events"
-          nextLabel="SCROLL TO EVENTS"
-        />
-
+        <InvitationSection config={config} guestName={guestName} />
         <EventsSection config={config} />
       </main>
 

@@ -315,11 +315,11 @@ body, html {
 }
 
 .door-img-left {
-  object-position: left center;
+  object-position: right center;
 }
 
 .door-img-right {
-  object-position: right center;
+  object-position: left center;
 }
 
 /* Door Opening Animations (Doors slide apart to Left & Right) */
@@ -359,12 +359,12 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .seal-gold-wrapper {
-  width: 180px;
-  height: 180px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
   background: transparent;
   display: flex;
@@ -405,14 +405,15 @@ body, html {
 }
 
 .tap-hint-text {
-  font-size: 0.75rem;
-  letter-spacing: 2px;
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
   color: #fce8a6;
   text-transform: uppercase;
   font-weight: 700;
+  white-space: nowrap;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(212, 175, 55, 0.7);
   background: rgba(20, 8, 14, 0.82);
-  padding: 6px 16px;
+  padding: 5px 14px;
   border-radius: 16px;
   border: 1px solid rgba(212, 175, 55, 0.55);
   backdrop-filter: blur(6px);
@@ -1167,29 +1168,6 @@ body, html {
   line-height: 1.5;
   margin-top: 0.85rem;
   margin-bottom: 12px;
-}
-
-.sample-indicator-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 18px;
-  background: rgba(20, 8, 12, 0.82);
-  border: 1px solid rgba(212, 175, 55, 0.7);
-  border-radius: 9999px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  margin-bottom: 14px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(212, 175, 55, 0.25);
-}
-
-.sample-indicator-badge span {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--accent-gold);
-  text-transform: uppercase;
 }
 
 .guest-welcome-badge {
