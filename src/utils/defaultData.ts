@@ -17,7 +17,7 @@ export const DEFAULT_WEDDING_CONFIG: WeddingConfig = {
   brideBio: 'Graceful, creative, and joyful.',
   groomPhoto: 'images/groom.jpg',
   bridePhoto: 'images/bride.jpg',
-  coupleHeroPhoto: 'images/couple4.jpg',
+  coupleHeroPhoto: 'images/couple-dark.jpg',
   events: [
     {
       id: 'muhurtham',

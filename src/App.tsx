@@ -41,7 +41,29 @@ export const App: React.FC = () => {
 
       <main className="main-content">
         <HeroSection config={config} />
-        <InvitationSection config={config} guestName={guestName} />
+
+        {/* Sample 1: New uploaded darker couple photo */}
+        <InvitationSection
+          config={config}
+          guestName={guestName}
+          photoUrl="images/couple-dark.jpg"
+          sampleBadge="Sample 1 of 2 • New Photo"
+          sectionId="invitation"
+          nextSectionId="#invitation-sample-2"
+          nextLabel="VIEW SAMPLE 2 (OLD)"
+        />
+
+        {/* Sample 2: Previous couple4 photo */}
+        <InvitationSection
+          config={config}
+          guestName={guestName}
+          photoUrl="images/couple4.jpg"
+          sampleBadge="Sample 2 of 2 • Previous Photo"
+          sectionId="invitation-sample-2"
+          nextSectionId="#events"
+          nextLabel="SCROLL FOR EVENTS"
+        />
+
         <EventsSection config={config} />
       </main>
 
