@@ -315,11 +315,11 @@ body, html {
 }
 
 .door-img-left {
-  object-position: right center;
+  object-position: left center;
 }
 
 .door-img-right {
-  object-position: left center;
+  object-position: right center;
 }
 
 /* Door Opening Animations (Doors slide apart to Left & Right) */
@@ -359,12 +359,12 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .seal-gold-wrapper {
-  width: 112px;
-  height: 112px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   background: transparent;
   display: flex;
@@ -405,15 +405,15 @@ body, html {
 }
 
 .tap-hint-text {
-  font-size: 0.68rem;
-  letter-spacing: 1.5px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
   color: #fce8a6;
   text-transform: uppercase;
   font-weight: 700;
   white-space: nowrap;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(212, 175, 55, 0.7);
   background: rgba(20, 8, 14, 0.82);
-  padding: 5px 14px;
+  padding: 6px 16px;
   border-radius: 16px;
   border: 1px solid rgba(212, 175, 55, 0.55);
   backdrop-filter: blur(6px);
