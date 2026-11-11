@@ -42,27 +42,40 @@ export const App: React.FC = () => {
       <main className="main-content">
         <HeroSection config={config} />
 
-        {/* Sample 1: New uploaded darker couple photo */}
-        <InvitationSection
-          config={config}
-          guestName={guestName}
-          photoUrl="images/couple-dark.jpg"
-          sampleBadge="Sample 1 of 2 • New Photo"
-          sectionId="invitation"
-          nextSectionId="#invitation-sample-2"
-          nextLabel="VIEW SAMPLE 2 (OLD)"
-        />
-
-        {/* Sample 2: Previous couple4 photo */}
-        <InvitationSection
-          config={config}
-          guestName={guestName}
-          photoUrl="images/couple4.jpg"
-          sampleBadge="Sample 2 of 2 • Previous Photo"
-          sectionId="invitation-sample-2"
-          nextSectionId="#events"
-          nextLabel="SCROLL FOR EVENTS"
-        />
+        {[
+          {
+            id: 'invitation',
+            photoUrl: 'images/couple-dark.jpg',
+            badge: 'Sample 1 of 3 • Dark',
+            nextSectionId: '#invitation-sample-2',
+            nextLabel: 'VIEW SAMPLE 2',
+          },
+          {
+            id: 'invitation-sample-2',
+            photoUrl: 'images/couple4.jpg',
+            badge: 'Sample 2 of 3 • Bright',
+            nextSectionId: '#invitation-sample-3',
+            nextLabel: 'VIEW SAMPLE 3',
+          },
+          {
+            id: 'invitation-sample-3',
+            photoUrl: 'images/couple-vignette.jpg',
+            badge: 'Sample 3 of 3 • Vignette',
+            nextSectionId: '#events',
+            nextLabel: 'SCROLL FOR EVENTS',
+          },
+        ].map((sample) => (
+          <InvitationSection
+            key={sample.id}
+            config={config}
+            guestName={guestName}
+            photoUrl={sample.photoUrl}
+            sampleBadge={sample.badge}
+            sectionId={sample.id}
+            nextSectionId={sample.nextSectionId}
+            nextLabel={sample.nextLabel}
+          />
+        ))}
 
         <EventsSection config={config} />
       </main>
