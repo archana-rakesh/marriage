@@ -16,6 +16,32 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isSupported, setIsSupported] = useState(true);
   const playAttemptedRef = useRef(false);
+  const userPausedRef = useRef(false);
+  const blurTimerRef = useRef<number | null>(null);
+
+  const pauseAudio = () => {
+    if (audioRef.current && !audioRef.current.paused) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const resumeAudio = () => {
+    if (!audioRef.current || !isSupported || userPausedRef.current || document.hidden) return;
+    if (!audioRef.current.paused) return;
+
+    audioRef.current
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch((err) => {
+        console.warn('Audio resume error:', err);
+        if (err?.name === 'NotSupportedError') {
+          setIsSupported(false);
+        }
+      });
+  };
 
   // Check device and audio format support
   useEffect(() => {
@@ -59,9 +85,11 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     playAttemptedRef.current = true;
     const AUTOPLAY_DELAY_MS = 800; // Delay autoplay to ensure smooth animation and device readiness
     let isCancelled = false;
+    let interactionCleanup: (() => void) | null = null;
 
     const timer = setTimeout(() => {
       if (isCancelled || !audioRef.current) return;
+      if (userPausedRef.current || document.hidden) return;
 
       const playPromise = audioRef.current.play();
       if (playPromise !== undefined) {
@@ -86,23 +114,17 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
             // Fallback: If blocked by browser autoplay policy on certain devices,
             // resume playback seamlessly on the very next user interaction (scroll or touch)
             const handleFirstInteraction = () => {
-              if (audioRef.current && audioRef.current.paused) {
-                audioRef.current
-                  .play()
-                  .then(() => {
-                    setIsPlaying(true);
-                  })
-                  .catch((fallbackErr) => {
-                    console.warn('Interaction play error:', fallbackErr);
-                  });
+              if (!isCancelled && !userPausedRef.current && !document.hidden) {
+                resumeAudio();
               }
-              cleanup();
+              interactionCleanup?.();
             };
 
-            const cleanup = () => {
+            interactionCleanup = () => {
               window.removeEventListener('touchstart', handleFirstInteraction);
               window.removeEventListener('click', handleFirstInteraction);
               window.removeEventListener('scroll', handleFirstInteraction);
+              interactionCleanup = null;
             };
 
             window.addEventListener('touchstart', handleFirstInteraction, { once: true, passive: true });
@@ -115,6 +137,64 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     return () => {
       isCancelled = true;
       clearTimeout(timer);
+      interactionCleanup?.();
+    };
+  }, [autoPlayTriggered, isSupported]);
+
+  // Pause music when website loses focus/visibility or hides; resume when open & focused
+  useEffect(() => {
+    if (!isSupported) return;
+
+    const clearBlurTimer = () => {
+      if (blurTimerRef.current !== null) {
+        window.clearTimeout(blurTimerRef.current);
+        blurTimerRef.current = null;
+      }
+    };
+
+    const resumeIfEligible = () => {
+      clearBlurTimer();
+      if (!autoPlayTriggered) return;
+      resumeAudio();
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden || document.visibilityState !== 'visible') {
+        clearBlurTimer();
+        pauseAudio();
+      } else {
+        resumeIfEligible();
+      }
+    };
+
+    const handleWindowBlur = () => {
+      clearBlurTimer();
+      // Defer slightly so hasFocus() distinguishes embedded map iframe interaction from leaving the site
+      blurTimerRef.current = window.setTimeout(() => {
+        blurTimerRef.current = null;
+        if (!document.hidden && document.hasFocus()) return;
+        pauseAudio();
+      }, 60);
+    };
+
+    const handlePageHide = () => {
+      clearBlurTimer();
+      pauseAudio();
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('blur', handleWindowBlur);
+    window.addEventListener('focus', resumeIfEligible);
+    window.addEventListener('pagehide', handlePageHide);
+    window.addEventListener('pageshow', resumeIfEligible);
+
+    return () => {
+      clearBlurTimer();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('blur', handleWindowBlur);
+      window.removeEventListener('focus', resumeIfEligible);
+      window.removeEventListener('pagehide', handlePageHide);
+      window.removeEventListener('pageshow', resumeIfEligible);
     };
   }, [autoPlayTriggered, isSupported]);
 
@@ -122,20 +202,11 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     if (!audioRef.current || !isSupported) return;
 
     if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
+      userPausedRef.current = true;
+      pauseAudio();
     } else {
-      audioRef.current
-        .play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch((err) => {
-          console.error('Audio play error:', err);
-          if (err?.name === 'NotSupportedError') {
-            setIsSupported(false);
-          }
-        });
+      userPausedRef.current = false;
+      resumeAudio();
     }
   };
 
